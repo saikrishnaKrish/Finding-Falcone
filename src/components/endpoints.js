@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Endpoints = () => {
+const endpoints = () => {
   return (
     <div>endpoints</div>
   )
 }
 
-export default Endpoints;
+export default endpoints
