@@ -1,24 +1,34 @@
 import React, { useState } from "react";
 import './dropdown.css';
-const Dropdown = () => {
-  const options = ["Select", "DonLon", "Enchai", "Jebing", "Sapir", "Lerbin", "Pingasor"];
-  const [value, setValue] = useState("Select");
+
+
+const Dropdown = ({data}) => { //id,label has to be passed
+
+  const options = data
+  const [value, setValue] = useState([]);
   const handleChange = (event) => {
     setValue(event.target.value);
   };
   return (
     <div>
       <form>
-        <select
-          value={value}
-          onChange={handleChange}>
+      <label>
+          Pick your favorite flavor:
+          <br />
+        {options  && <select
+          value={value.name}
+          onChange={handleChange}
+          >
+          <option disabled selected >Select</option>
           {options.map((value) => (
-            <option value={value} key={value}>
-              {value}
+            <option value={value.name} key={value.name}>
+              {value.name}
             </option>
           ))}
-        </select>
+        </select>}
+        </label>
       </form>
+      {value && <p>{value}</p>}
     </div>
   );
 // =======
@@ -58,3 +68,6 @@ const Dropdown = () => {
 // >>>>>>> ecad6b0bf42a8dafb6b516a466b01f2536d1993f
 }
 export default Dropdown;
+
+
+// https://askavy.com/react-select/

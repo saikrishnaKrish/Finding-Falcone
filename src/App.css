@@ -1,5 +1,25 @@
+body{
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: lightblue;
+   /* Set background image to fixed (don't scroll along with the page) */
+  background-attachment: fixed;
+
+  /* Center the background image */
+  background-position: center;
+
+  /* Set the background image to no repeat */
+  background-repeat: no-repeat;
+
+  /* Scale the background image to be as large as possible */
+  background-size: cover;
+    background-blend-mode: lighten;
+  background-image: url(https://images.unsplash.com/photo-1559080463-5c7eb3a52de1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80);
+}
 .App {
   text-align: center;
+
 }
 
 .App-logo {
@@ -14,7 +34,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #3862b8;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
