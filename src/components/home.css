@@ -1,29 +1,6 @@
 .container {
     display: grid;
-    padding-left: 26%;
-    padding-right: 30px;;
-    grid-column-gap: 80px;
-    height: 100vh;
-    
-  }
+    grid: auto auto / auto auto auto auto;
+    grid-gap: 10px;
 
-/* .dropdown1{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.dropdown2{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.dropdown3{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.dropdown4{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-} */
+  }

@@ -12,7 +12,7 @@ const Home = () => {
   const [planetsError,setPlanetsError]=useState(false);
   
   const getPlanets=async ()=>{
-    const planetsData=null;
+
     setPlanetsLoading(true);
     try{
         let planets=await axios.get(api.getPlanetsUrl)
@@ -26,32 +26,31 @@ const Home = () => {
       setPlanetsLoading(false);
     }
   }
-  // useEffect(()=>{
-  //   getPlanets()
+  useEffect(()=>{
+    getPlanets()
     
-  // },[])
+  },[])
 
 
-  return (    <>
+  return ( <>
     <Header/>
-    <div>Home component</div>
-      <h1>Planets</h1>
+      <h1>Find Falcone!</h1>
       {planetsLoading && <p>planets Loading</p>}
       {planetsError && <p>planetsError</p>}
       {planets && JSON.stringify(planets)}
 
       <div className='container'>
         <div className='dropdown1'>
-          <Dropdown />
+         {planets &&  <Dropdown data={planets}/>}
         </div>
         <div className='dropdown2'>
-          <Dropdown />
+        {planets &&  <Dropdown data={planets}/>}
         </div>
         <div className='dropdown3'>
-          <Dropdown />
+        {planets &&  <Dropdown data={planets}/>}
         </div>
         <div className='dropdown4'>
-          <Dropdown />
+        {planets &&  <Dropdown data={planets}/>}
         </div>
       </div>
     </>
