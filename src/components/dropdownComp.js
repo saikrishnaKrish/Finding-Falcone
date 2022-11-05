@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import './dropdown.css';
 
 
-const Dropdown = ({data}) => { //id,label has to be passed
+const DropdownComp = ({data}) => { //id,label has to be passed
 
   const options = data
   const [value, setValue] = useState([]);
@@ -67,7 +67,7 @@ const Dropdown = ({data}) => { //id,label has to be passed
 //   )
 // >>>>>>> ecad6b0bf42a8dafb6b516a466b01f2536d1993f
 }
-export default Dropdown;
+export default DropdownComp;
 
 
 // https://askavy.com/react-select/
