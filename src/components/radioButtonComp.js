@@ -1,23 +1,16 @@
 import React from 'react'
-import { RadioGroup, RadioButton } from 'react-radio-buttons';
-import RadioButtons from './radioButtons';
 
-const RadioButtonComp = ({vehiclesData}) => {
-  const vehiclesDataRadioButton = vehiclesData.map((vd)=>{
-    console.log(vd);
-    return (<RadioButton /> )
+const radioButtonComp = ({vehiclesData,rid}) => {
 
-  })
-  // {name: 'Space rocket', total_no: 1, max_distance: 300, speed: 4}
-  const availableVehicles = () => {
-
-
-  }
+  // // {name: 'Space rocket', total_no: 1, max_distance: 300, speed: 4}
+ 
 
   return (
     // <div>{JSON.stringify(vehiclesData)}</div>
-    <div><RadioButtons /></div>
+    <div>
+    
+      </div>
   )
 }
 
-export default RadioButtonComp;
+export default radioButtonComp;

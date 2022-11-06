@@ -9,6 +9,8 @@ const DropdownComp = ({data}) => { //id,label has to be passed
   const handleChange = (event) => {
     setValue(event.target.value);
   };
+
+
   return (
     <div>
       <form>
@@ -21,7 +23,7 @@ const DropdownComp = ({data}) => { //id,label has to be passed
           >
           <option disabled selected >Select</option>
           {options.map((value) => (
-            <option value={value.name} key={value.name}>
+            <option value={value.name} id={value.key} key={value.key}>
               {value.name}
             </option>
           ))}
