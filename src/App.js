@@ -2,10 +2,14 @@ import React from 'react';
 import './App.css';
 import Layout from './components/layout';
 
+import Paper from '@mui/material/Paper';
+
 function App() {
   return (
     <div className="App">
-      <Layout />
+      <Paper>
+        <Layout />
+      </Paper>
     </div>
   );
 }
