@@ -14,7 +14,10 @@ const Home = () => {
   const [vehicles, setVehicles] = useState([]);
   const [vehiclesLoading, setVehiclesLoading] = useState(false);
   const [vehiclesError, setVehiclesError] = useState(false);
-
+  const [v1, setV1] = useState("");
+  const [v2, setV2] = useState("");
+  const [v3, setV3] = useState("");
+  const [v4, setV4] = useState("");
 // Declared globally (as in attached to window object or equivalent)
 let myuniqueidcounter = 0;
 
@@ -70,22 +73,22 @@ function uniqueId() {
     getVehicles();
   }, []);
 
-  const [first, setFirst] = React.useState("");
-  const [sec, setSec] = React.useState("");
+  // const [first, setFirst] = React.useState("");
+  // const [sec, setSec] = React.useState("");
 
-  const [radioValues, setRadioValues] = React.useState([]);
+  // const [radioValues, setRadioValues] = React.useState([]);
 
-  React.useEffect(() => {
-    const values = [];
-    if (first.length) values[0] = first;
-    if (sec.length) values[1] = sec;
-    setRadioValues(values);
-  }, [first, sec]);
+  // React.useEffect(() => {
+  //   const values = [];
+  //   if (first.length) values[0] = first;
+  //   if (sec.length) values[1] = sec;
+  //   setRadioValues(values);
+  // }, [first, sec]);
 
   
-  const vData = (vehiclesData,rname) => {
+  const vData = (vehiclesData, rname, selectedVehicles) => {
     return (
-      <div>
+      <div onChange={(e) => selectedVehicles(e.target.value)}>
         {vehiclesData.map((vd) => {
           return (
             <div>
@@ -98,6 +101,8 @@ function uniqueId() {
     );
   };
 
+  console.log(v1, v2, v3, v4);
+ 
 
   return (
     <>
@@ -127,19 +132,19 @@ function uniqueId() {
       <div className="container">
         <div className="dropdown1">
           {planets && <DropdownComp data={planets} />}
-          {vehicles && vData(vehicles,'d1')}
+          {vehicles && vData(vehicles,'d1', setV1)}
         </div>
         <div className="dropdown2">
           {planets && <DropdownComp data={planets} />}
-          {vehicles && vData(vehicles,'d2')}
+          {vehicles && vData(vehicles,'d2', setV2)}
         </div>
         <div className="dropdown3">
           {planets && <DropdownComp data={planets} />}
-          {vehicles && vData(vehicles,'d3')}
+          {vehicles && vData(vehicles,'d3', setV3)}
         </div>
         <div className="dropdown4">
           {planets && <DropdownComp data={planets} />}
-          {vehicles && vData(vehicles,'d4')}
+          {vehicles && vData(vehicles,'d4', setV4)}
         </div>
       </div>
     </>
