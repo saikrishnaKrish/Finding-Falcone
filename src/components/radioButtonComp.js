@@ -1,16 +1,20 @@
 import React from 'react'
 
-const radioButtonComp = ({vehiclesData,rid}) => {
-
-  // // {name: 'Space rocket', total_no: 1, max_distance: 300, speed: 4}
- 
-
+const RadioButtonComp = ({vehiclesData, rname, selectedVehicles}) => {
+  console.log(vehiclesData)
   return (
-    // <div>{JSON.stringify(vehiclesData)}</div>
-    <div>
-    
-      </div>
-  )
-}
+    <div onChange={(e) => selectedVehicles(e.target.value)}>
+      {vehiclesData.map((vd) => {
+        return (
+          <div>
+            <label for={vd.key}>{vd.name} </label>
+            <input type="radio"  name={rname} value={vd.name} />
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+// console.log(v1, v2, v3, v4);
 
-export default radioButtonComp;
+export default RadioButtonComp;
