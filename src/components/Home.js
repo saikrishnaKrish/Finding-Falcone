@@ -124,7 +124,9 @@ const Home = () => {
           {vehicles && <RadioButtonComp vehiclesData={vehicles} rname={'d3'} selectedVehicles={setV3} />}
         </div>
         <div className="dropdown4">
-          {planets && <DropdownComp data={planets} 
+          {planets && <DropdownComp 
+          data={planets} //passing planets Data
+          updatePlanets={setPlanets} //passing updater function for updating planets
           updateSelectedVehicles={setSelectedPlanets} //handling selected planets
           />}
           {vehicles && <RadioButtonComp vehiclesData={vehicles}

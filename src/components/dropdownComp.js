@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import './dropdown.css';
 
 
-const DropdownComp = ({data,updateSelectedVehicles}) => { //id,label has to be passed
+const DropdownComp = ({data,updatePlanets,updateSelectedVehicles}) => { //id,label has to be passed
 
   //updateSelectedVehicles is a set function for handling selected data.
-  const options = data;
-
+  const options= data ;
 
   // [{"name":"Donlon","distance":100,"key":1,"selected":true},
   // {"name":"Enchai","distance":200,"key":2,"selected":false},
@@ -17,31 +16,33 @@ const DropdownComp = ({data,updateSelectedVehicles}) => { //id,label has to be p
 
   const [value, setValue] = useState([]);
   const handleChange = (event) => {
-    setValue(event.target.value);
-    console.log(event.currentTarget)
-    console.log(event)
+    let selectedId=event.target.value;
+    let filterdselectedOption=options.filter((opt)=>{return opt.key != selectedId});
+    let fsO=options.filter((opt)=>{return opt.key == selectedId});
+    updatePlanets(filterdselectedOption)
+    console.log('target')
+    console.log(event.target.value)
+    setValue(fsO[0].name);
+
+
   };
 
   console.log(value)
   return (
     <div>
       <form>
-      <label>
-          Select Destination:
+      <label>  Select Destination:</label>
           <br />
-        {options  && <select
-          value={value.name}
-          onChange={(e)=>handleChange(e)}
-          >
-          <option disabled selected >Select</option>
-          {options.map((value) => (
-            <option value={value.key} id={value.key} 
-            key={value.key} disabled={value.selected}>
-              {value.name}
+        {options && <select onChange={handleChange} >
+          <option defaultValue disabled  >Select</option>
+          {options.map((val) => (
+            <option value={val.key} id={val.key} 
+            key={val.key} disabled={val.selected}>
+              {val.name}
             </option>
           ))}
         </select>}
-        </label>
+        
       </form>
       {value && <p>{value}</p>}
     </div>
