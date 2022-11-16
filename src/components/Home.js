@@ -105,6 +105,7 @@ const Home = () => {
       <div className="container">
         <div className="dropdown1">
           {planets && <DropdownComp data={planets}
+          updatePlanets={setPlanets} //passing updater function for updating planets
            updateSelectedVehicles={setSelectedPlanets} //handling selected planets
            />}
           {vehicles && <RadioButtonComp
@@ -112,6 +113,7 @@ const Home = () => {
         </div>
         <div className="dropdown2">
           {planets && <DropdownComp data={planets}
+          updatePlanets={setPlanets} //passing updater function for updating planets
           updateSelectedVehicles={setSelectedPlanets} //handling selected planets
           />}
           {vehicles && <RadioButtonComp
@@ -119,6 +121,7 @@ const Home = () => {
         </div>
         <div className="dropdown3">
           {planets && <DropdownComp data={planets} 
+          updatePlanets={setPlanets} //passing updater function for updating planets
           updateSelectedVehicles={setSelectedPlanets} //handling selected planets
           />}
           {vehicles && <RadioButtonComp vehiclesData={vehicles} rname={'d3'} selectedVehicles={setV3} />}
