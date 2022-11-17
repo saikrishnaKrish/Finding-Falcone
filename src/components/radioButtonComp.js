@@ -1,12 +1,22 @@
 import React from 'react'
+import { useState } from 'react';
 
-const RadioButtonComp = ({vehiclesData, rname, selectedVehicles}) => {
-  console.log(vehiclesData)
+const RadioButtonComp = ({vehiclesData, rname, updateVehicles}) => {
+  // console.log(vehiclesData)
+  const [selectVehicle,setSelectVehicle]=useState('')
+  const handleChange=(event)=>{
+    event.preventDefault();
+    let selectedVehicle=event.target.value;
+    let filteredSelectedOption=vehiclesData.filter((vd)=>vd.name!=selectedVehicle)
+    console.log(filteredSelectedOption)
+    setSelectVehicle(selectedVehicle)
+    updateVehicles(filteredSelectedOption,selectedVehicle)
+  }
   return (
-    <div onChange={(e) => selectedVehicles(e.target.value)}>
+    <div onChange={(e) => handleChange(e)}>
       {vehiclesData.map((vd) => {
         return (
-          <div>
+          <div key={vd.key}>
             <label for={vd.key}>{vd.name} </label>
             <input type="radio"  name={rname} value={vd.name} />
           </div>
