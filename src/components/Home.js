@@ -19,15 +19,11 @@ const Home = () => {
 
   //function for handling Selected Planets
   //Two variables of selected vehicles and selected planets
-  const [selectedPlanets,setSelectedPlanets] =useState([]);//for handling dropdown
+  const [selectedPlanets, setSelectedPlanets] = useState(new Set());//for handling dropdown
   //function for handling Selected Vehicles
-  const [selectedVehicles,setSelectedVehicles] =useState([]);
+  const [selectedVehicles, setSelectedVehicles] = useState(new Set());//for handling radio button
 
-  //handling vehicles user Input Data
-  const [v1, setV1] = useState("");
-  const [v2, setV2] = useState("");
-  const [v3, setV3] = useState("");
-  const [v4, setV4] = useState("");
+
 
   // Declared globally (as in attached to window object or equivalent)
   //generating Unique id
@@ -42,7 +38,7 @@ const Home = () => {
   // let keyedData = data.map(value => Object.assign(value, { Id: uniqueId() });
 
   //handling Planets Api Data
-   const getPlanets = async () => {
+  const getPlanets = async () => {
     setPlanetsLoading(true);
     try {
       let planets = await axios.get(api.getPlanetsUrl);
@@ -78,13 +74,34 @@ const Home = () => {
       setVehiclesLoading(false);
     }
   };
-  
+
   //calling Api Calls
   useEffect(() => {
     getPlanets();
     getVehicles();
   }, []);
 
+  const updateSelectedPlanetsData = (data, selectedId) => {
+    // console.log('seleceted planet')
+    // console.log(selectedId)
+    // setPlanets(data)// to update the planets data
+    if (!selectedPlanets.has(selectedId)) {
+      let obj=selectedPlanets;
+      obj.add(selectedId);
+      setSelectedPlanets(obj);
+    }
+  }
+
+  const updateSelectedVehiclesData = (data, selectedId) => {
+    // console.log('selected vehicles')
+    // console.log(data, selectedId)
+    // setVehicles(data); // to update vehicles data
+    if(!selectedVehicles.has(selectedId)){
+     let obj=selectedVehicles;
+     obj.add(selectedId)
+      setSelectedVehicles(obj);
+    }
+  }
 
   return (
     <>
@@ -94,48 +111,53 @@ const Home = () => {
       {planetsLoading && <p>planets Loading...</p>}
       {planetsError && <p>planetsError</p>}
       {planets && JSON.stringify(planets)}
-<br />
-<br />
+      <br />
+      <br />
       {vehiclesLoading && <p>vehicles Loading...</p>}
       {vehiclesError && <p>vehiclesError</p>}
       {vehicles && JSON.stringify(vehicles)}
-<br />
-<br />
-<br />
+      <br />
+      {/* {selectedVehicles && <p>{JSON.stringify()}</p>}
+      {selectedPlanets && <p>{JSON.stringify()}</p>}
+      <br /> */}
+      <br />
       <div className="container">
         <div className="dropdown1">
           {planets && <DropdownComp data={planets}
-          updatePlanets={setPlanets} //passing updater function for updating planets
-           updateSelectedVehicles={setSelectedPlanets} //handling selected planets
-           />}
+            updatePlanets={updateSelectedPlanetsData} //passing updater function for updating planets
+          />}
           {vehicles && <RadioButtonComp
-            vehiclesData={vehicles} rname={'d1'} selectedVehicles={setV1} />}
+            vehiclesData={vehicles} rname={'d1'}
+            updateVehicles={updateSelectedVehiclesData} />}
         </div>
         <div className="dropdown2">
           {planets && <DropdownComp data={planets}
-          updatePlanets={setPlanets} //passing updater function for updating planets
-          updateSelectedVehicles={setSelectedPlanets} //handling selected planets
+            updatePlanets={updateSelectedPlanetsData} //passing updater function for updating planets
           />}
           {vehicles && <RadioButtonComp
-            vehiclesData={vehicles} rname={'d2'} selectedVehicles={setV2} />}
+            vehiclesData={vehicles} rname={'d2'}
+            updateVehicles={updateSelectedVehiclesData} />}
         </div>
         <div className="dropdown3">
-          {planets && <DropdownComp data={planets} 
-          updatePlanets={setPlanets} //passing updater function for updating planets
-          updateSelectedVehicles={setSelectedPlanets} //handling selected planets
+          {planets && <DropdownComp data={planets}
+            updatePlanets={updateSelectedPlanetsData} //passing updater function for updating planets
           />}
-          {vehicles && <RadioButtonComp vehiclesData={vehicles} rname={'d3'} selectedVehicles={setV3} />}
+          {vehicles && <RadioButtonComp
+            vehiclesData={vehicles}
+            rname={'d3'}
+            updateVehicles={updateSelectedVehiclesData} />}
         </div>
         <div className="dropdown4">
-          {planets && <DropdownComp 
-          data={planets} //passing planets Data
-          updatePlanets={setPlanets} //passing updater function for updating planets
-          updateSelectedVehicles={setSelectedPlanets} //handling selected planets
+          {planets && <DropdownComp
+            data={planets} //passing planets Data
+            updatePlanets={updateSelectedPlanetsData} //passing updater function for updating planets
           />}
           {vehicles && <RadioButtonComp vehiclesData={vehicles}
-            rname={'d4'} selectedVehicles={setV4} />}
+            rname={'d4'} 
+            updateVehicles={updateSelectedVehiclesData} />}
         </div>
       </div>
+
     </>
   );
 };
