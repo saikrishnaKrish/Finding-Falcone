@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import './dropdown.css';
 
 
-const DropdownComp = ({ data, updatePlanets }) => { //id,label has to be passed
+const DropdownComp = ({ data, updatePlanets,dropdownId }) => { //id,label has to be passed
 
   //updateSelectedVehicles is a set function for handling selected data.
   const options = data;
@@ -18,10 +18,11 @@ const DropdownComp = ({ data, updatePlanets }) => { //id,label has to be passed
   
   const handleChange = (event) => {
     event.preventDefault();
-    let selectedId=event.target.value;
-    let filterdselectedOption=options.filter((opt)=>{return opt.name != selectedId});
-    updatePlanets(filterdselectedOption,selectedId)
-    setselectedPlanet(selectedId);
+    let selectedvalue=event.target.value;
+    let filterdselectedOption=options.filter((opt)=>{return opt.name != selectedvalue});
+    let selectedOption=options.filter((opt)=>{return opt.name == selectedvalue});
+    updatePlanets(filterdselectedOption,selectedOption,dropdownId)
+    setselectedPlanet(selectedvalue);
 
   };
 
