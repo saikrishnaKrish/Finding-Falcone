@@ -82,21 +82,49 @@ const Home = () => {
   }, []);
 
   const updateSelectedPlanetsData = (data, selectedOption,dropdownId) => {
-    // console.log('seleceted planet')
+    console.log('seleceted planet',data)
     // console.log(selectedOption)
     // console.log(dropdownId)
-    setPlanets(data)// to update the planets data
+    // to update the planets data
     let obj=selectedPlanets;
-    obj[dropdownId]=selectedOption[0]
+    if(obj[dropdownId] === undefined || obj[dropdownId].key===selectedOption[0].key){
+      obj[dropdownId]=selectedOption[0]  
+      setSelectedPlanets(obj);
+      setPlanets(data)
+      console.log('first selection')
+    }
+    else{
+      let existingValue=obj[dropdownId]; //existing value
+      // let planets=data;
+      obj[dropdownId]=selectedOption[0]  
+      setSelectedPlanets(obj);
+      console.log('check',obj[dropdownId].key===selectedOption.key)
+      console.log('second selection',data) 
+
+      // data.push(existingValue)
+      // setPlanets(planets)
+      // console.log('existingValue',existingValue)
+      // planets.filter((p)=>p.key!=existingValue.key)
+      console.log('planets',planets)
+      console.log('existing option',existingValue)
+
+
+      let updateplanets=[...data,existingValue]
+      console.log('updated plents',updateplanets)
+      setPlanets(updateplanets)
+      // setPlanets((planetsData)=>[...planetsData,existingValue])
+      
+    }
+
+    // obj[dropdownId]=selectedOption[0]
     // {dropdownId:selectedOption[0]}
-    setSelectedPlanets(obj)
     // setSelectedPlanets((selected)=>({...selected,obj}))
     // if (!selectedPlanets.has(selectedId)) {
     //   let obj=selectedPlanets;
     //   obj.add(selectedId);
     //   setSelectedPlanets(obj);
     // }
-    console.log(selectedPlanets)
+    // console.log(selectedPlanets)
   }
 
   const updateSelectedVehiclesData = (data, selectedId) => {
