@@ -19,7 +19,7 @@ const Home = () => {
 
   //function for handling Selected Planets
   //Two variables of selected vehicles and selected planets
-  const [selectedPlanets, setSelectedPlanets] = useState(new Set());//for handling dropdown
+  const [selectedPlanets, setSelectedPlanets] = useState({});//for handling dropdown
   //function for handling Selected Vehicles
   const [selectedVehicles, setSelectedVehicles] = useState(new Set());//for handling radio button
 
@@ -81,15 +81,22 @@ const Home = () => {
     getVehicles();
   }, []);
 
-  const updateSelectedPlanetsData = (data, selectedId) => {
+  const updateSelectedPlanetsData = (data, selectedOption,dropdownId) => {
     // console.log('seleceted planet')
-    // console.log(selectedId)
-    // setPlanets(data)// to update the planets data
-    if (!selectedPlanets.has(selectedId)) {
-      let obj=selectedPlanets;
-      obj.add(selectedId);
-      setSelectedPlanets(obj);
-    }
+    // console.log(selectedOption)
+    // console.log(dropdownId)
+    setPlanets(data)// to update the planets data
+    let obj=selectedPlanets;
+    obj[dropdownId]=selectedOption[0]
+    // {dropdownId:selectedOption[0]}
+    setSelectedPlanets(obj)
+    // setSelectedPlanets((selected)=>({...selected,obj}))
+    // if (!selectedPlanets.has(selectedId)) {
+    //   let obj=selectedPlanets;
+    //   obj.add(selectedId);
+    //   setSelectedPlanets(obj);
+    // }
+    console.log(selectedPlanets)
   }
 
   const updateSelectedVehiclesData = (data, selectedId) => {
@@ -121,9 +128,12 @@ const Home = () => {
       {selectedPlanets && <p>{JSON.stringify()}</p>}
       <br /> */}
       <br />
+      {JSON.stringify(selectedPlanets)}
+      <br/>
       <div className="container">
         <div className="dropdown1">
           {planets && <DropdownComp data={planets}
+            dropdownId={1}
             updatePlanets={updateSelectedPlanetsData} //passing updater function for updating planets
           />}
           {vehicles && <RadioButtonComp
@@ -132,6 +142,7 @@ const Home = () => {
         </div>
         <div className="dropdown2">
           {planets && <DropdownComp data={planets}
+            dropdownId={2}
             updatePlanets={updateSelectedPlanetsData} //passing updater function for updating planets
           />}
           {vehicles && <RadioButtonComp
@@ -140,6 +151,7 @@ const Home = () => {
         </div>
         <div className="dropdown3">
           {planets && <DropdownComp data={planets}
+            dropdownId={3}
             updatePlanets={updateSelectedPlanetsData} //passing updater function for updating planets
           />}
           {vehicles && <RadioButtonComp
@@ -149,6 +161,7 @@ const Home = () => {
         </div>
         <div className="dropdown4">
           {planets && <DropdownComp
+            dropdownId={4}
             data={planets} //passing planets Data
             updatePlanets={updateSelectedPlanetsData} //passing updater function for updating planets
           />}
