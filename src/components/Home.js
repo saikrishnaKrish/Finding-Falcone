@@ -19,9 +19,9 @@ const Home = () => {
 
   //function for handling Selected Planets
   //Two variables of selected vehicles and selected planets
-  const [selectedPlanets, setSelectedPlanets] = useState(new Set());//for handling dropdown
+  const [selectedPlanets, setSelectedPlanets] = useState({});//for handling dropdown
   //function for handling Selected Vehicles
-  const [selectedVehicles, setSelectedVehicles] = useState(new Set());//for handling radio button
+  const [selectedVehicles, setSelectedVehicles] = useState({});//for handling radio button
 
 
 
@@ -81,26 +81,62 @@ const Home = () => {
     getVehicles();
   }, []);
 
-  const updateSelectedPlanetsData = (data, selectedId) => {
-    // console.log('seleceted planet')
-    // console.log(selectedId)
-    // setPlanets(data)// to update the planets data
-    if (!selectedPlanets.has(selectedId)) {
-      let obj=selectedPlanets;
-      obj.add(selectedId);
+  const updateSelectedPlanetsData = (data, selectedOption,dropdownId) => {
+    console.log('seleceted planet',data)
+    // console.log(selectedOption)
+    // console.log(dropdownId)
+    // to update the planets data
+    let obj=selectedPlanets;
+    if(obj[dropdownId] === undefined || obj[dropdownId].key===selectedOption[0].key){
+      obj[dropdownId]=selectedOption[0]  
       setSelectedPlanets(obj);
+      setPlanets(data)
+      console.log('first selection')
     }
+    else{
+      let existingValue=obj[dropdownId]; //existing value
+      // let planets=data;
+      obj[dropdownId]=selectedOption[0]  
+      setSelectedPlanets(obj);
+      console.log('check',obj[dropdownId].key===selectedOption.key)
+      console.log('second selection',data) 
+
+      // data.push(existingValue)
+      // setPlanets(planets)
+      // console.log('existingValue',existingValue)
+      // planets.filter((p)=>p.key!=existingValue.key)
+      console.log('planets',planets)
+      console.log('existing option',existingValue)
+
+
+      let updateplanets=[...data,existingValue]
+      console.log('updated plents',updateplanets)
+      setPlanets(updateplanets)
+      // setPlanets((planetsData)=>[...planetsData,existingValue])
+      
+    }
+
+    // obj[dropdownId]=selectedOption[0]
+    // {dropdownId:selectedOption[0]}
+    // setSelectedPlanets((selected)=>({...selected,obj}))
+    // if (!selectedPlanets.has(selectedId)) {
+    //   let obj=selectedPlanets;
+    //   obj.add(selectedId);
+    //   setSelectedPlanets(obj);
+    // }
+    // console.log(selectedPlanets)
   }
 
-  const updateSelectedVehiclesData = (data, selectedId) => {
+  const updateSelectedVehiclesData = (data, selectedVehicle,radioBtnId) => {
     // console.log('selected vehicles')
     // console.log(data, selectedId)
     // setVehicles(data); // to update vehicles data
-    if(!selectedVehicles.has(selectedId)){
-     let obj=selectedVehicles;
-     obj.add(selectedId)
-      setSelectedVehicles(obj);
-    }
+    // if(!selectedVehicles.has(selectedId)){
+    //  let obj=selectedVehicles;
+    //  obj[radioBtnId]=selectedVehicle
+    //  console.log('selectedVehicles',obj)
+    //   setSelectedVehicles(obj);
+    // }
   }
 
   return (
@@ -121,39 +157,46 @@ const Home = () => {
       {selectedPlanets && <p>{JSON.stringify()}</p>}
       <br /> */}
       <br />
+    selected Planets : {JSON.stringify(selectedPlanets)}
+    selected Vehicles:{JSON.stringify(selectedVehicles)}
+      <br/>
       <div className="container">
         <div className="dropdown1">
           {planets && <DropdownComp data={planets}
+            dropdownId={1}
             updatePlanets={updateSelectedPlanetsData} //passing updater function for updating planets
           />}
           {vehicles && <RadioButtonComp
-            vehiclesData={vehicles} rname={'d1'}
+            vehiclesData={vehicles} radioBtnId={'d1'}
             updateVehicles={updateSelectedVehiclesData} />}
         </div>
         <div className="dropdown2">
           {planets && <DropdownComp data={planets}
+            dropdownId={2}
             updatePlanets={updateSelectedPlanetsData} //passing updater function for updating planets
           />}
           {vehicles && <RadioButtonComp
-            vehiclesData={vehicles} rname={'d2'}
+            vehiclesData={vehicles} radioBtnId={'d2'}
             updateVehicles={updateSelectedVehiclesData} />}
         </div>
         <div className="dropdown3">
           {planets && <DropdownComp data={planets}
+            dropdownId={3}
             updatePlanets={updateSelectedPlanetsData} //passing updater function for updating planets
           />}
           {vehicles && <RadioButtonComp
             vehiclesData={vehicles}
-            rname={'d3'}
+            radioBtnId={'d3'}
             updateVehicles={updateSelectedVehiclesData} />}
         </div>
         <div className="dropdown4">
           {planets && <DropdownComp
+            dropdownId={4}
             data={planets} //passing planets Data
             updatePlanets={updateSelectedPlanetsData} //passing updater function for updating planets
           />}
           {vehicles && <RadioButtonComp vehiclesData={vehicles}
-            rname={'d4'} 
+            radioBtnId={'d4'} 
             updateVehicles={updateSelectedVehiclesData} />}
         </div>
       </div>
