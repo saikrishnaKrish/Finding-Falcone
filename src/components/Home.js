@@ -21,7 +21,7 @@ const Home = () => {
   //Two variables of selected vehicles and selected planets
   const [selectedPlanets, setSelectedPlanets] = useState({});//for handling dropdown
   //function for handling Selected Vehicles
-  const [selectedVehicles, setSelectedVehicles] = useState(new Set());//for handling radio button
+  const [selectedVehicles, setSelectedVehicles] = useState({});//for handling radio button
 
 
 
@@ -127,15 +127,16 @@ const Home = () => {
     // console.log(selectedPlanets)
   }
 
-  const updateSelectedVehiclesData = (data, selectedId) => {
+  const updateSelectedVehiclesData = (data, selectedVehicle,radioBtnId) => {
     // console.log('selected vehicles')
     // console.log(data, selectedId)
     // setVehicles(data); // to update vehicles data
-    if(!selectedVehicles.has(selectedId)){
-     let obj=selectedVehicles;
-     obj.add(selectedId)
-      setSelectedVehicles(obj);
-    }
+    // if(!selectedVehicles.has(selectedId)){
+    //  let obj=selectedVehicles;
+    //  obj[radioBtnId]=selectedVehicle
+    //  console.log('selectedVehicles',obj)
+    //   setSelectedVehicles(obj);
+    // }
   }
 
   return (
@@ -156,7 +157,8 @@ const Home = () => {
       {selectedPlanets && <p>{JSON.stringify()}</p>}
       <br /> */}
       <br />
-      {JSON.stringify(selectedPlanets)}
+    selected Planets : {JSON.stringify(selectedPlanets)}
+    selected Vehicles:{JSON.stringify(selectedVehicles)}
       <br/>
       <div className="container">
         <div className="dropdown1">
@@ -165,7 +167,7 @@ const Home = () => {
             updatePlanets={updateSelectedPlanetsData} //passing updater function for updating planets
           />}
           {vehicles && <RadioButtonComp
-            vehiclesData={vehicles} rname={'d1'}
+            vehiclesData={vehicles} radioBtnId={'d1'}
             updateVehicles={updateSelectedVehiclesData} />}
         </div>
         <div className="dropdown2">
@@ -174,7 +176,7 @@ const Home = () => {
             updatePlanets={updateSelectedPlanetsData} //passing updater function for updating planets
           />}
           {vehicles && <RadioButtonComp
-            vehiclesData={vehicles} rname={'d2'}
+            vehiclesData={vehicles} radioBtnId={'d2'}
             updateVehicles={updateSelectedVehiclesData} />}
         </div>
         <div className="dropdown3">
@@ -184,7 +186,7 @@ const Home = () => {
           />}
           {vehicles && <RadioButtonComp
             vehiclesData={vehicles}
-            rname={'d3'}
+            radioBtnId={'d3'}
             updateVehicles={updateSelectedVehiclesData} />}
         </div>
         <div className="dropdown4">
@@ -194,7 +196,7 @@ const Home = () => {
             updatePlanets={updateSelectedPlanetsData} //passing updater function for updating planets
           />}
           {vehicles && <RadioButtonComp vehiclesData={vehicles}
-            rname={'d4'} 
+            radioBtnId={'d4'} 
             updateVehicles={updateSelectedVehiclesData} />}
         </div>
       </div>
