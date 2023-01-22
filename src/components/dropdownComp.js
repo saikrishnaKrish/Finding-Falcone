@@ -19,8 +19,8 @@ const DropdownComp = ({ data, updatePlanets,dropdownId }) => { //id,label has to
   const handleChange = (event) => {
     event.preventDefault();
     let selectedvalue=event.target.value;
-    let filterdselectedOption=options.filter((opt)=>{return opt.name != selectedvalue});
-    let selectedOption=options.filter((opt)=>{return opt.name == selectedvalue});
+    let filterdselectedOption=options.filter((opt)=>{return opt.name !== selectedvalue});
+    let selectedOption=options.filter((opt)=>{return opt.name === selectedvalue});
     updatePlanets(filterdselectedOption,selectedOption,dropdownId)
     setselectedPlanet(selectedvalue);
 
