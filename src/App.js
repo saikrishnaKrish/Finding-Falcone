@@ -7,9 +7,9 @@ import Paper from '@mui/material/Paper';
 function App() {
   return (
     <div className="App">
-      <Paper>
+      {/* <Paper> */}
         <Layout />
-      </Paper>
+      {/* </Paper> */}
     </div>
   );
 }
