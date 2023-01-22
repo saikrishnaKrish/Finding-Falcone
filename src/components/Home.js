@@ -128,9 +128,11 @@ const Home = () => {
   }
 
   const updateSelectedVehiclesData = (data, selectedVehicle,radioBtnId) => {
-    // console.log('selected vehicles')
-    // console.log(data, selectedId)
-    // setVehicles(data); // to update vehicles data
+    console.log('selected vehicles')
+    console.log(data, selectedVehicle)
+
+    setSelectedVehicles(selectedVehicle)
+    setVehicles(data); // to update vehicles data
     // if(!selectedVehicles.has(selectedId)){
     //  let obj=selectedVehicles;
     //  obj[radioBtnId]=selectedVehicle
