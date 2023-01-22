@@ -100,20 +100,16 @@ const Home = () => {
       setSelectedPlanets(obj);
       console.log('check',obj[dropdownId].key===selectedOption.key)
       console.log('second selection',data) 
-
       // data.push(existingValue)
       // setPlanets(planets)
       // console.log('existingValue',existingValue)
       // planets.filter((p)=>p.key!=existingValue.key)
       console.log('planets',planets)
       console.log('existing option',existingValue)
-
-
       let updateplanets=[...data,existingValue]
       console.log('updated plents',updateplanets)
       setPlanets(updateplanets)
-      // setPlanets((planetsData)=>[...planetsData,existingValue])
-      
+      // setPlanets((planetsData)=>[...planetsData,existingValue])      
     }
 
     // obj[dropdownId]=selectedOption[0]
@@ -127,22 +123,45 @@ const Home = () => {
     // console.log(selectedPlanets)
   }
 
-  const updateSelectedVehiclesData = (data, selectedVehicle,radioBtnId) => {
-    console.log('selected vehicles')
-    console.log(data, selectedVehicle)
+  const updateSelectedVehiclesData = (selectedVehicle,radioBtnId) => {
+    
+    console.log(selectedVehicle)
+  
+    // selectedVehicle.total_no=selectedVehicle.total_no-1;
+    // console.log(selectedVehicle)
+    let selecetedKey=selectedVehicle.key
+    let up_obj = vehicles.map(obj => {
+      if (obj.key === selecetedKey && obj.total_no>0) {
+       obj.total_no=obj.total_no-1;
+      } 
+      if (obj.key === selecetedKey && obj.total_no===0) {
+       obj.selected=true;
+      }
+      return obj;
+     })
+     
+     setSelectedVehicles({...selectedVehicles,selectedVehicle})
+     setVehicles(up_obj)
 
-    setSelectedVehicles(selectedVehicle)
-    setVehicles(data); // to update vehicles data
-    // if(!selectedVehicles.has(selectedId)){
-    //  let obj=selectedVehicles;
-    //  obj[radioBtnId]=selectedVehicle
-    //  console.log('selectedVehicles',obj)
-    //   setSelectedVehicles(obj);
+
+
+
+    // if(selectedVehicle.total_no>0){
+    //   selectedVehicle.total_no=selectedVehicle.total_no-1;
+    // }else{
+    //   selectedVehicle.selectVehicle=true
     // }
+    // console.log('filetederd sekectio ',selectedVehicle)
+    // let obj=vehicles;
+    // console.log('before obj',obj[selectedKey])
+    // obj[selectedKey]=selectedVehicle
+    // console.log('final obj',obj[selectedKey])
+    // setVehicles(obj)
+    // setSelectedVehicles((v)=>[...v,selectedVehicle])
   }
 
   return (
-    <>
+    <div id="main">
       <Header />
       <h1>Find Falcone!</h1>
       <br />
@@ -203,7 +222,7 @@ const Home = () => {
         </div>
       </div>
 
-    </>
+    </div>
   );
 };
 
