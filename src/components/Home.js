@@ -23,8 +23,18 @@ const Home = () => {
   //function for handling Selected Vehicles
   const [selectedVehicles, setSelectedVehicles] = useState({});//for handling radio button
 
+  const [findFalcone,SetfindFalcone]=useState('')
 
 
+ useEffect(()=>{
+
+ if( Object.keys(selectedVehicles).length===3 && Object.keys(selectedPlanets).length===3){
+  SetfindFalcone('disabled')
+  console.log(true)
+ }  
+ },[selectedVehicles,selectedPlanets]);
+
+ 
   // Declared globally (as in attached to window object or equivalent)
   //generating Unique id
   let myuniqueidcounter = 0;
@@ -44,10 +54,8 @@ const Home = () => {
       let planets = await axios.get(api.getPlanetsUrl);
       myuniqueidcounter = 0;
       planets = planets.data;
-      planets.map((pdata) => {
-        Object.assign(pdata, { key: uniqueId(), selected: false })
-      })
-
+      planets.map((pdata) => Object.assign(pdata, { key: uniqueId(), selected: false })
+      )
       setPlanets(planets);
     } catch (err) {
       setPlanetsError(err.message || "unexpected error");
@@ -130,6 +138,9 @@ const Home = () => {
     // selectedVehicle.total_no=selectedVehicle.total_no-1;
     // console.log(selectedVehicle)
     let selecetedKey=selectedVehicle.key
+
+    //for updating the value of vehicles count
+    //picking upvalue and increment it.
     let up_obj = vehicles.map(obj => {
       if (obj.key === selecetedKey && obj.total_no>0) {
        obj.total_no=obj.total_no-1;
@@ -139,9 +150,31 @@ const Home = () => {
       }
       return obj;
      })
-     
-     setSelectedVehicles({...selectedVehicles,selectedVehicle})
-     setVehicles(up_obj)
+    let selected_obj=selectedVehicles;
+
+    if( selected_obj[radioBtnId]===undefined){
+      selected_obj[radioBtnId]=selectedVehicle
+      setVehicles(up_obj)
+    }else{
+      let curr_obj= selected_obj[radioBtnId].key; 
+      
+      let dec_obj=vehicles.map(obj=>{
+        if(obj.key === curr_obj){
+          obj.total_no++
+          obj.selected===true?obj.selected=false:obj.selected=false;
+        }
+        return obj
+      })
+
+      selected_obj[radioBtnId]=selectedVehicle
+      setVehicles(dec_obj)
+    }
+
+
+     console.log(selected_obj)
+     console.log(selectedVehicle)
+     setSelectedVehicles(selected_obj)
+ 
 
 
 
@@ -179,7 +212,17 @@ const Home = () => {
       <br /> */}
       <br />
     selected Planets : {JSON.stringify(selectedPlanets)}
+    <br/>
+    <br/>
     selected Vehicles:{JSON.stringify(selectedVehicles)}
+
+    <br/>
+    <br/>
+    selectedPlanetsLength : { Object.keys(selectedPlanets).length }
+    <br/>
+    <br/>
+    selectedVehiclesLength : {Object.keys(selectedVehicles).length }
+
       <br/>
       <div className="container">
         <div className="dropdown1">
@@ -222,6 +265,14 @@ const Home = () => {
         </div>
       </div>
 
+
+
+<div>
+{/* {selectedVehicles && selectedVehicles.map(v=><div>{selectedVehicles.name}</div>)} */}
+
+<button disabled={findFalcone ? false : true} onClick={()=>{alert('clicked!!!')}}> Find Falcone </button>
+
+</div>
     </div>
   );
 };
