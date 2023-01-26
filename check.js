@@ -1,0 +1,2 @@
+let obj = { "d2": { "name": "Space pod", "total_no": 0, "max_distance": 200, "speed": 2, "key": 1, "selected": true }, "d1": { "name": "Space rocket", "total_no": 0, "max_distance": 300, "speed": 4, "key": 2, "selected": true }, "d3": { "name": "Space pod", "total_no": 0, "max_distance": 200, "speed": 2, "key": 1, "selected": true }, "d4": { "name": "Space ship", "total_no": 1, "max_distance": 600, "speed": 10, "key": 4, "selected": false } }
+let vehicles=[]
