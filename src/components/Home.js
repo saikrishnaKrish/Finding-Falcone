@@ -17,24 +17,18 @@ const Home = () => {
   const [vehiclesLoading, setVehiclesLoading] = useState(false);
   const [vehiclesError, setVehiclesError] = useState(false);
 
+  //
+  const [planetsname,setPlanetsname]=useState([])
+  const [vehiclesname,setVehiclesname]=useState([])
   //function for handling Selected Planets
   //Two variables of selected vehicles and selected planets
   const [selectedPlanets, setSelectedPlanets] = useState({});//for handling dropdown
   //function for handling Selected Vehicles
   const [selectedVehicles, setSelectedVehicles] = useState({});//for handling radio button
 
-  const [findFalcone,SetfindFalcone]=useState('')
+  const [findFalconebtn,SetfindFalconebtn]=useState('')
 
 
- useEffect(()=>{
-
- if( Object.keys(selectedVehicles).length===3 && Object.keys(selectedPlanets).length===3){
-  SetfindFalcone('disabled')
-  console.log(true)
- }  
- },[selectedVehicles,selectedPlanets]);
-
- 
   // Declared globally (as in attached to window object or equivalent)
   //generating Unique id
   let myuniqueidcounter = 0;
@@ -43,6 +37,24 @@ const Home = () => {
     return myuniqueidcounter;
   }
 
+
+  function checkFindFalcone(){
+    (Object.keys(selectedVehicles).length===4 && Object.keys(selectedPlanets).length===4) && SetfindFalconebtn('disabled');
+    let arr=[]
+    Object.entries(selectedVehicles).map(e=>{
+          // console.log(e[1].name)
+          arr.push(e[1].name)
+      })
+      setVehiclesname(arr)
+      let arr2=[]
+      Object.entries(selectedPlanets).map(e=>{
+        // console.log(e[1].name)
+        arr2.push(e[1].name)
+    })
+    setPlanetsname(arr2)
+
+
+  }
 
   // // Do this in the props change or whereever your data gets passed in
   // let keyedData = data.map(value => Object.assign(value, { Id: uniqueId() });
@@ -176,7 +188,13 @@ const Home = () => {
      setSelectedVehicles(selected_obj)
  
 
+    checkFindFalcone()
 
+    
+// //  if( Object.keys(selectedVehicles).length===3 && Object.keys(selectedPlanets).length===3){
+// //   SetfindFalcone('disabled')
+//   console.log(true)
+// //  }  
 
 
     // if(selectedVehicle.total_no>0){
@@ -193,6 +211,16 @@ const Home = () => {
     // setSelectedVehicles((v)=>[...v,selectedVehicle])
   }
 
+  function checkFeasibility(planet,vehicle){
+
+  }
+
+
+  function findFalcone(){
+    console.log(planetsname)
+    console.log(vehiclesname)
+    alert('good progress')
+  }
   return (
     <div id="main">
       <Header />
@@ -230,7 +258,7 @@ const Home = () => {
             dropdownId={1}
             updatePlanets={updateSelectedPlanetsData} //passing updater function for updating planets
           />}
-          {vehicles && <RadioButtonComp
+          {vehicles && selectedPlanets[1] && <RadioButtonComp
             vehiclesData={vehicles} radioBtnId={'d1'}
             updateVehicles={updateSelectedVehiclesData} />}
         </div>
@@ -239,7 +267,7 @@ const Home = () => {
             dropdownId={2}
             updatePlanets={updateSelectedPlanetsData} //passing updater function for updating planets
           />}
-          {vehicles && <RadioButtonComp
+          {vehicles  && selectedPlanets[2]  && <RadioButtonComp
             vehiclesData={vehicles} radioBtnId={'d2'}
             updateVehicles={updateSelectedVehiclesData} />}
         </div>
@@ -248,7 +276,7 @@ const Home = () => {
             dropdownId={3}
             updatePlanets={updateSelectedPlanetsData} //passing updater function for updating planets
           />}
-          {vehicles && <RadioButtonComp
+          {vehicles  && selectedPlanets[3]  && <RadioButtonComp
             vehiclesData={vehicles}
             radioBtnId={'d3'}
             updateVehicles={updateSelectedVehiclesData} />}
@@ -259,7 +287,7 @@ const Home = () => {
             data={planets} //passing planets Data
             updatePlanets={updateSelectedPlanetsData} //passing updater function for updating planets
           />}
-          {vehicles && <RadioButtonComp vehiclesData={vehicles}
+          {vehicles  && selectedPlanets[4]  && <RadioButtonComp vehiclesData={vehicles}
             radioBtnId={'d4'} 
             updateVehicles={updateSelectedVehiclesData} />}
         </div>
@@ -270,7 +298,7 @@ const Home = () => {
 <div>
 {/* {selectedVehicles && selectedVehicles.map(v=><div>{selectedVehicles.name}</div>)} */}
 
-<button disabled={findFalcone ? false : true} onClick={()=>{alert('clicked!!!')}}> Find Falcone </button>
+<button disabled={findFalconebtn ? false : true} onClick={()=>{findFalcone('clicked!!!')}}> Find Falcone </button>
 
 </div>
     </div>
